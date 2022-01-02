@@ -3,6 +3,6 @@ from django.db import models
 # Create your models here.
 class products:
     id: str
-    pr: str
-    li: str
+    price: str
+    link: str
     pic: str
