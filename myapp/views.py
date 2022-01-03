@@ -9,7 +9,9 @@ from difflib import get_close_matches
 import webbrowser
 from collections import defaultdict
 import random
+import time
 from .models import products
+from random import randint
 
 # Create your views here.
 def index(request):
@@ -21,6 +23,9 @@ def sign_up(request):
 #     text = request.POST['text']
 #     amount_of_words = len(text.split())
 #     return render(request,'counter.html',{'amount': amount_of_words})
+def register(request):
+  return render(request,'register.html')
+
 def counter(request):
     #Taking Input form Webpage
     text = request.POST['text']
@@ -154,9 +159,27 @@ def counter(request):
                         "128.199.200.112:138", "149.56.123.99:3128", "128.199.200.112:80", "125.141.200.39:80",
                         "134.213.29.202:4444"]
     proxies = {'https': random.choice(proxies_list)}
-    source_code_a = requests.get(url_a, headers=headers_a)
-    plain_text = source_code_a.text
-    soup_a = BeautifulSoup(plain_text, "html.parser")
+    # source_code_a = requests.get(url_a, headers=headers_a)
+    # plain_text = source_code_a.text
+    # soup_a = BeautifulSoup(plain_text, "html.parser")
+    while(True): 
+     source_code_a = requests.get(url_a, headers=headers_a)
+     plain_text = source_code_a.text
+     soup_a = BeautifulSoup(plain_text, "html.parser")
+     err="Error"
+     for check in soup_a.find_all('h4'):
+      err= check.text
+
+     if(err=="Type the characters you see in this image:"):
+       time.sleep(0.5*(randint(1,5)))
+       print(err)
+       continue
+     else:
+       print(err)
+       break
+
+
+    # print(soup_a)
 
     for html in soup_a.find_all('div', {'class': 'sg-col-inner'}):
             title, link, pic = None, None , None
@@ -166,12 +189,12 @@ def counter(request):
                 price = p.text
             for l in html.find_all('a', {'class': 'a-size-base a-link-normal s-underline-text s-underline-link-text s-link-style a-text-normal'}):
                 link = home_a + l.get('href')
-            #print(title,link,price)
             for pi in html.find_all('img', {'class': 's-image'}):
                 pic = pi.get('src')
+            print(title,link,price,pic)
             # if pic == None:
             #   pic = "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg"
-            if title and pic:
+            if title and pic and link:
              map_a[title] = [price, link , pic]
     a_prod_id1 = products() 
     a_prod_id2 = products() 
@@ -201,7 +224,6 @@ def counter(request):
             a_prod_id2.link = j
            elif ct == 3:
             a_prod_id2.pic = j
-           ct += 1
            ct += 1
       if l == 3:
         a_prod_id3.id = i
