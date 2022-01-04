@@ -212,11 +212,10 @@ def counter(request):
       err= check.text
 
      if(err=="Type the characters you see in this image:"):
-       time.sleep(0.5*(randint(1,5)))
+       time.sleep(0.5*(randint(4,8)))
        print(err)
        continue
      else:
-       print(err)
        break
 
 
@@ -228,8 +227,14 @@ def counter(request):
                 title = heading.text
             for p in html.find_all('span', {'class': 'a-price-whole'}):
                 price = p.text
-            for l in html.find_all('a', {'class': 'a-size-base a-link-normal s-underline-text s-underline-link-text s-link-style a-text-normal'}):
-                link = home_a + l.get('href')
+            for head in html.find_all('h2'):
+              for l in head.find_all('a'):
+                link = home_a + l.get("href")
+
+            if(link==None):
+             for l in html.find_all('a', {'class': 'a-size-base a-link-normal s-underline-text s-underline-link-text s-link-style a-text-normal'}):
+              link = home_a + l.get('href')
+
             for pi in html.find_all('img', {'class': 's-image'}):
                 pic = pi.get('src')
             print(title,link,price,pic)
