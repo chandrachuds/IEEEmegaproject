@@ -28,11 +28,23 @@
                 <button type="button" class="btn btn-outline-primary">Log In</button> -->
                 <!-- <button class="btn btn-outline-primary mr-1" href="#">Sign up</button>
                 <button class="btn btn-outline-primary" href="#">Login</button> -->
+                {% if user.is_authenticated %}
+                <form action="logout" method="GET">
+                    <button type="submit" class="btn btn-outline-primary" >Log Out</button>
+                </form>
+                {% else %}
                 <div class="btn-group" role="group" aria-label="Basic example">
-                    <button class="btn btn-outline-primary mr-1" href="#">Sign up</button>
-                <button class="btn btn-outline-primary" href="#">Log In</button>
+                <form action="register" method="GET">
+                 <button type="submit" class="btn btn-outline-primary" >Sign up</button>
+                </form>
+                <form action="login" method="GET">
+                <button type="submit" class="btn btn-outline-primary" >Log In</button>
+                 </form>
+                <!-- <button type="submit" btn btn-outline-primary mr-1" href="register">Sign up</button>
+                <button class="btn btn-outline-primary" href="#">Log In</button> -->
                     <!-- <button type="button" class="btn btn-secondary">Right</button> -->
                 </div>
+                {% endif %}
                 <!-- <button type="button" class="btn btn-outline-warning">Log In</button>
                 <button type="button" class="btn btn-outline-warning">Sign up</button> -->
             </div>

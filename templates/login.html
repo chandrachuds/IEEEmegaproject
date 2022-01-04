@@ -21,7 +21,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE html>
 <html>
 <head>
-<title>SignUp Form</title>
+<title>Log In Form</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
@@ -51,12 +51,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 {% for message in messages %}
                 <p class="center large">{{message}}</p> 
                 {% endfor %}
-				<form method="POST" action="register">
+				<form method="POST" action="login">
                     {% csrf_token %}
 					<input type="text" name="username" placeholder="Username" required="">
-					<input type="email" name="email" placeholder="Email" required="">
+					<!-- <input type="email" name="email" placeholder="Email" required=""> -->
 					<input type="password" name="password" placeholder="Password" required="">
-					<input type="password" name="password2" placeholder="Confirm Password" required="">
+					<!-- <input type="password" name="password2" placeholder="Confirm Password" required=""> -->
 					<!-- <div class="wthree-text">
 						<label class="anim">
 							<input type="checkbox" class="checkbox" required="">
@@ -67,7 +67,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<input type="submit" />
 				</form>
 
-				<p>Don't have an Account? <a href="#"> Login Now!</a></p>
+				<p>Don't have an Account? <a href="#"> Sign Up Now!</a></p>
 			</div>
 		</div>
 		<!-- copyright -->
